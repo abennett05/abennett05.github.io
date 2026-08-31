@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { Project } from '../data/projects';
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const { id, kicker, title, blurb, items } = Astro.props;
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <section id={id}>
@@ -19,169 +21,225 @@ const { id, kicker, title, blurb, items } = Astro.props;
     <p class="section-blurb">{blurb}</p>
   </div>
 
-  <div class="carousel" data-reveal>
-    <ul class="carousel-track" tabindex="0" aria-label={`${title} carousel`}>
-      {items.map((item, i) => (
-        <li class="card" style={`--tilt: ${i % 2 === 0 ? '-0.5deg' : '0.5deg'}`}>
-          <span class="card-emoji" aria-hidden="true">{item.emoji}</span>
-          <h3 class="card-title">{item.title}</h3>
-          <p class="card-desc">{item.description}</p>
-          <ul class="card-tags" aria-label="Technologies">
-            {item.tags.map((tag) => (
-              <li>{tag}</li>
-            ))}
-          </ul>
-          {item.links && item.links.length > 0 && (
-            <div class="card-links">
-              {item.links.map((link) => (
-                <a href={link.url} target="_blank" rel="noopener">
-                  {link.label} ↗
-                </a>
+  <div class="showcase" data-reveal>
+    <ul class="showcase-track" tabindex="0" aria-label={`${title} slides`}>
+      {items.map((item) => (
+        <li class="slide">
+          <Image src={item.image} alt={item.title} class="slide-img" width={1600} />
+          <div class="slide-scrim" aria-hidden="true"></div>
+          <div class="slide-info">
+            <h3 class="slide-title">{item.title}</h3>
+            <p class="slide-sub">
+              <span class="slide-subtitle">{item.subtitle}</span>
+              {item.tags.map((tag) => (
+                <span class="slide-tag">{tag}</span>
               ))}
-            </div>
-          )}
+            </p>
+            <p class="slide-desc">{item.description}</p>
+            {item.links && item.links.length > 0 && (
+              <p class="slide-links">
+                {item.links.map((link) => (
+                  <a href={link.url} target="_blank" rel="noopener">
+                    {link.label} ↗
+                  </a>
+                ))}
+              </p>
+            )}
+          </div>
         </li>
       ))}
     </ul>
 
-    <div class="carousel-nav">
-      <button class="carousel-btn" data-dir="-1" aria-label={`Previous ${kicker}`}>←</button>
-      <button class="carousel-btn" data-dir="1" aria-label={`Next ${kicker}`}>→</button>
+    <div class="showcase-ui">
+      <span class="showcase-count" aria-live="polite">
+        <span class="showcase-current">01</span>&nbsp;/&nbsp;{pad(items.length)}
+      </span>
+      <button class="showcase-btn" data-dir="-1" aria-label="Previous slide">←</button>
+      <button class="showcase-btn" data-dir="1" aria-label="Next slide">→</button>
     </div>
   </div>
 </section>
 
 <script>
-  document.querySelectorAll<HTMLElement>('.carousel').forEach((carousel) => {
-    const track = carousel.querySelector<HTMLElement>('.carousel-track');
+  document.querySelectorAll<HTMLElement>('.showcase').forEach((showcase) => {
+    const track = showcase.querySelector<HTMLElement>('.showcase-track');
+    const current = showcase.querySelector<HTMLElement>('.showcase-current');
     if (!track) return;
+    const count = track.children.length;
 
-    carousel.querySelectorAll<HTMLButtonElement>('.carousel-btn').forEach((btn) => {
+    const indexNow = () =>
+      Math.round(track.scrollLeft / track.clientWidth);
+
+    showcase.querySelectorAll<HTMLButtonElement>('.showcase-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
-        const card = track.querySelector<HTMLElement>('.card');
-        const step = card ? card.offsetWidth + 16 : track.clientWidth * 0.8;
-        track.scrollBy({ left: step * Number(btn.dataset.dir), behavior: 'smooth' });
+        // wrap around at the ends
+        const next = (indexNow() + Number(btn.dataset.dir) + count) % count;
+        track.scrollTo({ left: next * track.clientWidth, behavior: 'smooth' });
       });
     });
+
+    track.addEventListener(
+      'scroll',
+      () => {
+        if (current) current.textContent = String(indexNow() + 1).padStart(2, '0');
+      },
+      { passive: true }
+    );
   });
 </script>
 
 <style>
-  .carousel {
+  .showcase {
     position: relative;
   }
 
-  .carousel-track {
-    list-style: none;
-    margin: 0;
-    padding: 0.5rem 0.25rem 1.25rem;
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: var(--line) transparent;
-  }
-  .carousel-track:focus-visible {
-    outline: 2px solid var(--yellow);
-    outline-offset: 4px;
-    border-radius: var(--radius);
-  }
-
-  .card {
-    flex: 0 0 min(21rem, 82vw);
-    scroll-snap-align: start;
-    background: var(--bg-card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-    transition: transform 0.3s var(--ease-pop), border-color 0.3s, box-shadow 0.3s;
-  }
-  .card:hover {
-    transform: translateY(-5px) rotate(var(--tilt));
-    border-color: var(--yellow);
-    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
-  }
-
-  .card-emoji {
-    font-size: 2.1rem;
-    line-height: 1;
-  }
-  .card-title {
-    font-size: 1.25rem;
-  }
-  .card-desc {
-    margin: 0;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    flex-grow: 1;
-  }
-
-  .card-tags {
+  .showcase-track {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 44px rgba(50, 38, 26, 0.18);
   }
-  .card-tags li {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--yellow);
-    background: var(--yellow-soft);
-    border-radius: 999px;
-    padding: 0.2rem 0.6rem;
+  .showcase-track::-webkit-scrollbar {
+    display: none;
+  }
+  .showcase-track:focus-visible {
+    outline: 3px solid var(--yellow);
+    outline-offset: 4px;
   }
 
-  .card-links {
+  .slide {
+    position: relative;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    height: clamp(24rem, 64vh, 36rem);
+    overflow: hidden;
+  }
+
+  .slide :global(img.slide-img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* gradient so the text reads over any image */
+  .slide-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(31, 21, 12, 0.92) 0%,
+      rgba(31, 21, 12, 0.55) 32%,
+      rgba(31, 21, 12, 0) 62%
+    );
+  }
+
+  .slide-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.8rem 2rem;
+    /* leave room for the arrows */
+    padding-right: clamp(9rem, 16vw, 12rem);
+    color: var(--cream);
+  }
+  .slide-title {
+    font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+    color: #fdfaf2;
+  }
+  .slide-sub {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.5rem;
-    margin-top: 0.2rem;
-  }
-  .card-links a {
+    margin: 0.5rem 0 0;
     font-family: var(--font-mono);
     font-size: 0.82rem;
-    color: var(--text);
-    text-decoration: none;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 0.35rem 0.8rem;
-    transition: border-color 0.2s, color 0.2s, transform 0.2s var(--ease-pop);
   }
-  .card-links a:hover {
-    border-color: var(--yellow);
+  .slide-subtitle {
     color: var(--yellow);
-    transform: translateY(-2px);
+  }
+  .slide-tag {
+    border: 1px solid rgba(253, 250, 242, 0.4);
+    border-radius: 999px;
+    padding: 0.1rem 0.55rem;
+    color: rgba(253, 250, 242, 0.85);
+  }
+  .slide-desc {
+    margin: 0.6rem 0 0;
+    max-width: 34rem;
+    font-size: 0.95rem;
+    color: rgba(253, 250, 242, 0.82);
+  }
+  .slide-links {
+    margin: 0.7rem 0 0;
+    display: flex;
+    gap: 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+  .slide-links a {
+    color: #fdfaf2;
+    text-decoration-color: var(--yellow);
+    transition: color 0.2s;
+  }
+  .slide-links a:hover {
+    color: var(--yellow);
   }
 
-  .carousel-nav {
+  /* ---- bare-bones UI: counter + arrows, bottom right ---- */
+  .showcase-ui {
+    position: absolute;
+    right: 1.4rem;
+    bottom: 1.4rem;
     display: flex;
-    gap: 0.5rem;
-    justify-content: flex-end;
+    align-items: center;
+    gap: 0.6rem;
   }
-  .carousel-btn {
+  .showcase-count {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: rgba(253, 250, 242, 0.85);
+    margin-right: 0.3rem;
+  }
+  .showcase-btn {
     font-family: var(--font-mono);
     font-size: 1.05rem;
-    color: var(--text);
-    background: var(--bg-raised);
-    border: 1px solid var(--line);
+    color: var(--espresso);
+    background: rgba(253, 250, 242, 0.92);
+    border: none;
     border-radius: 999px;
-    width: 2.6rem;
-    height: 2.6rem;
+    width: 2.7rem;
+    height: 2.7rem;
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s, transform 0.2s var(--ease-pop);
+    transition: background 0.2s, transform 0.2s var(--ease-pop);
   }
-  .carousel-btn:hover {
-    border-color: var(--yellow);
-    color: var(--yellow);
+  .showcase-btn:hover {
+    background: var(--yellow);
     transform: translateY(-2px);
   }
-  .carousel-btn:active {
+  .showcase-btn:active {
     transform: translateY(0) scale(0.95);
+  }
+
+  @media (max-width: 640px) {
+    .slide {
+      height: clamp(22rem, 70vh, 30rem);
+    }
+    .slide-info {
+      padding: 1.3rem 1.3rem 4.4rem;
+    }
+    .showcase-ui {
+      right: 1rem;
+      bottom: 1rem;
+    }
   }
 </style>

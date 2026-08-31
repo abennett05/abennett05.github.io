@@ -1,71 +1,166 @@
 ---
-const hats = [
-  { emoji: '🧠', label: 'Computer Scientist', note: 'algorithms & systems thinking' },
-  { emoji: '📊', label: 'Data Engineer', note: 'pipelines that just keep humming' },
-  { emoji: '🕹️', label: 'Game Developer', note: 'juice, feel, and fun first' },
-  { emoji: '🚀', label: 'Entrepreneur', note: 'shipping beats perfect' },
-  { emoji: '📷', label: 'Photographer', note: 'chasing light on weekends' },
+const education = [
+  {
+    degree: 'B.S. Computer Science',
+    school: 'Auburn University',
+    when: 'Graduating 2027',
+    emoji: '🎓',
+  },
+  {
+    degree: 'M.S. Data Engineering',
+    school: 'Auburn University',
+    when: 'Graduating 2028',
+    emoji: '📈',
+  },
+];
+
+const roles = [
+  { emoji: '🧠', label: 'Computer Scientist' },
+  { emoji: '📊', label: 'Data Engineer' },
+  { emoji: '🕹️', label: 'Game Developer' },
+  { emoji: '🚀', label: 'Entrepreneur' },
+  { emoji: '📷', label: 'Photographer' },
 ];
 ---
 
 <section id="about">
   <div data-reveal>
     <p class="section-kicker">about</p>
-    <h2 class="section-title">One person, five hats.</h2>
+    <h2 class="section-title">Student by transcript,<br />builder by <span class="mark">default</span>.</h2>
     <p class="section-blurb">
-      I'm Adrian — a builder at heart. By day I wrangle data and write software;
-      by night I make games, chase business ideas, and take my camera places it
-      probably shouldn't go. I like tools that feel good, code that reads well,
-      and projects that ship.
+      I'm Adrian — an Auburn student who treats every semester like a shipping
+      deadline. Between lectures I build data pipelines, make games, chase
+      business ideas, and take my camera places it probably shouldn't go.
     </p>
   </div>
 
-  <ul class="hats">
-    {hats.map((hat, i) => (
-      <li class="hat" data-reveal data-reveal-delay={i * 70}>
-        <span class="hat-emoji" aria-hidden="true">{hat.emoji}</span>
-        <span class="hat-label">{hat.label}</span>
-        <span class="hat-note">{hat.note}</span>
-      </li>
-    ))}
-  </ul>
+  <div class="about-grid">
+    <div class="edu" data-reveal>
+      <h3 class="about-subhead">Education</h3>
+      <ol class="edu-list">
+        {education.map((e, i) => (
+          <li class="edu-item" data-reveal data-reveal-delay={i * 90}>
+            <span class="edu-emoji" aria-hidden="true">{e.emoji}</span>
+            <div>
+              <p class="edu-degree">{e.degree}</p>
+              <p class="edu-school">{e.school}</p>
+            </div>
+            <span class="edu-when">{e.when}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <div class="roles" data-reveal>
+      <h3 class="about-subhead">Meanwhile, also</h3>
+      <ul class="role-list">
+        {roles.map((r, i) => (
+          <li class="role-chip" data-reveal data-reveal-delay={i * 60}>
+            <span aria-hidden="true">{r.emoji}</span> {r.label}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
 </section>
 
 <style>
-  .hats {
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .about-subhead {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--mocha);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 0 0 1rem;
+  }
+
+  .edu-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-    gap: 1rem;
+    gap: 0.9rem;
   }
-  .hat {
-    background: var(--bg-card);
+  .edu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--card);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 1.2rem 1.3rem;
-    display: grid;
-    gap: 0.15rem;
+    padding: 1.1rem 1.3rem;
     transition: transform 0.3s var(--ease-pop), border-color 0.3s,
       opacity 0.6s ease;
   }
-  .hat:hover {
-    transform: translateY(-4px) rotate(-0.6deg);
-    border-color: var(--yellow);
+  .edu-item:hover {
+    transform: translateY(-3px) rotate(-0.4deg);
+    border-color: var(--espresso);
   }
-  .hat:nth-child(even):hover {
-    transform: translateY(-4px) rotate(0.6deg);
-  }
-  .hat-emoji {
+  .edu-emoji {
     font-size: 1.6rem;
   }
-  .hat-label {
+  .edu-degree {
     font-weight: 700;
+    margin: 0;
   }
-  .hat-note {
+  .edu-school {
+    margin: 0;
+    color: var(--mocha);
+    font-size: 0.92rem;
+  }
+  .edu-when {
+    margin-left: auto;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--text-muted);
+    font-size: 0.78rem;
+    color: var(--espresso);
+    background: var(--yellow);
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    white-space: nowrap;
+  }
+
+  .role-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .role-chip {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    background: transparent;
+    border: 1.5px solid var(--espresso);
+    border-radius: 999px;
+    padding: 0.45rem 0.95rem;
+    transition: transform 0.25s var(--ease-pop), background 0.25s,
+      opacity 0.6s ease;
+  }
+  .role-chip:hover {
+    background: var(--yellow);
+    transform: translateY(-3px) rotate(-1deg);
+  }
+  .role-chip:nth-child(even):hover {
+    transform: translateY(-3px) rotate(1deg);
+  }
+
+  @media (max-width: 760px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .edu-item {
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
   }
 </style>

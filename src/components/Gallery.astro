@@ -187,17 +187,16 @@ const contacts = [
   .contact-links a {
     font-family: var(--font-mono);
     font-size: 0.92rem;
-    color: var(--text);
+    color: var(--espresso);
     text-decoration: none;
-    background: var(--bg-card);
-    border: 1px solid var(--line);
+    background: transparent;
+    border: 1.5px solid var(--espresso);
     border-radius: 999px;
     padding: 0.6rem 1.2rem;
-    transition: border-color 0.2s, color 0.2s, transform 0.25s var(--ease-pop);
+    transition: background 0.2s, transform 0.25s var(--ease-pop);
   }
   .contact-links a:hover {
-    border-color: var(--yellow);
-    color: var(--yellow);
+    background: var(--yellow);
     transform: translateY(-3px) rotate(-1deg);
   }
 
@@ -244,15 +243,16 @@ const contacts = [
     padding: 0;
     border: 1px solid var(--line);
     border-radius: 12px;
-    background: var(--bg-card);
+    background: var(--card);
     cursor: zoom-in;
     overflow: hidden;
+    box-shadow: 0 8px 20px rgba(50, 38, 26, 0.12);
     transition: transform 0.3s var(--ease-pop), border-color 0.3s;
   }
   .shot:hover,
   .shot:focus-visible {
     transform: translateY(-4px) rotate(-0.6deg);
-    border-color: var(--yellow);
+    border-color: var(--espresso);
   }
   /* the <Image> component's img doesn't carry this file's scope attribute */
   .shot :global(img) {
@@ -282,7 +282,7 @@ const contacts = [
   .lightbox-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(8, 8, 12, 0.9);
+    background: rgba(31, 21, 12, 0.92);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     animation: fade-in 0.35s ease both;
@@ -309,17 +309,16 @@ const contacts = [
     width: 2.8rem;
     height: 2.8rem;
     font-size: 1.1rem;
-    color: var(--text);
-    background: var(--bg-raised);
-    border: 1px solid var(--line);
+    color: var(--espresso);
+    background: rgba(253, 250, 242, 0.92);
+    border: none;
     border-radius: 999px;
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s, transform 0.2s var(--ease-pop);
+    transition: background 0.2s, transform 0.2s var(--ease-pop);
     animation: fade-in 0.35s ease both;
   }
   .lightbox-close:hover {
-    border-color: var(--yellow);
-    color: var(--yellow);
+    background: var(--yellow);
     transform: rotate(90deg);
   }
 </style>

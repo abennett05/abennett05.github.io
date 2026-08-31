@@ -44,7 +44,7 @@ const base = import.meta.env.BASE_URL;
     </main>
 
     <footer class="footer">
-      <p><span class="footer-mark">✳</span> Built by Adrian Bennett with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a> and a healthy amount of yellow.</p>
+      <p><span class="footer-mark">✳</span> Built by Adrian Bennett with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>, a lot of coffee, and a healthy amount of yellow.</p>
     </footer>
 
     <script>
@@ -97,19 +97,21 @@ const base = import.meta.env.BASE_URL;
 
 <style is:global>
   :root {
-    --bg: #0b0b10;
-    --bg-raised: #14141c;
-    --bg-card: #191924;
-    --line: #262633;
-    --text: #ecebe6;
-    --text-muted: #a1a0ab;
+    /* morning coffee: cream, tans, espresso — with the yellow */
+    --cream: #f4ecdd;
+    --latte: #ece0c8;
+    --card: #efe5d0;
+    --line: #d9c8a9;
+    --espresso: #32261a;
+    --mocha: #7a6749;
     --yellow: #ffd60a;
-    --yellow-soft: rgba(255, 214, 10, 0.14);
+    --yellow-soft: rgba(255, 214, 10, 0.28);
+    --roast: #1f150c; /* darkest — image overlays, lightbox */
     --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
       'Helvetica Neue', Arial, sans-serif;
     --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas,
       'Liberation Mono', monospace;
-    --radius: 16px;
+    --radius: 18px;
     --ease-pop: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
@@ -124,30 +126,31 @@ const base = import.meta.env.BASE_URL;
 
   body {
     margin: 0;
-    background: var(--bg);
-    color: var(--text);
+    background: var(--cream);
+    color: var(--espresso);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    /* faint dot grid, so the dark isn't flat */
-    background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-    background-size: 28px 28px;
+    /* faint dot grid, like a pour-over filter */
+    background-image: radial-gradient(rgba(50, 38, 26, 0.09) 1px, transparent 1px);
+    background-size: 26px 26px;
   }
 
   ::selection {
     background: var(--yellow);
-    color: #111;
+    color: var(--espresso);
   }
 
   a {
-    color: var(--yellow);
-    text-decoration-thickness: 1.5px;
+    color: var(--espresso);
+    text-decoration-color: var(--yellow);
+    text-decoration-thickness: 2px;
     text-underline-offset: 3px;
   }
 
   h1, h2, h3 {
-    line-height: 1.15;
+    line-height: 1.12;
     letter-spacing: -0.02em;
     margin: 0;
   }
@@ -157,8 +160,8 @@ const base = import.meta.env.BASE_URL;
     left: 1rem;
     top: -3rem;
     z-index: 100;
-    background: var(--yellow);
-    color: #111;
+    background: var(--espresso);
+    color: var(--cream);
     padding: 0.5rem 1rem;
     border-radius: 0 0 10px 10px;
     font-family: var(--font-mono);
@@ -186,18 +189,18 @@ const base = import.meta.env.BASE_URL;
     align-items: center;
     gap: 1.5rem;
     padding: 0.5rem 0.65rem 0.5rem 1rem;
-    background: rgba(20, 20, 28, 0.82);
+    background: rgba(244, 236, 221, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--line);
     border-radius: 999px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 8px 26px rgba(50, 38, 26, 0.14);
   }
   .nav-logo {
     font-family: var(--font-mono);
     font-weight: 700;
     font-size: 1rem;
-    color: var(--text);
+    color: var(--espresso);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -205,6 +208,7 @@ const base = import.meta.env.BASE_URL;
   }
   .nav-logo-mark {
     color: var(--yellow);
+    -webkit-text-stroke: 1px var(--espresso);
     display: inline-block;
     transition: transform 0.5s var(--ease-pop);
   }
@@ -222,24 +226,25 @@ const base = import.meta.env.BASE_URL;
     display: inline-block;
     padding: 0.35rem 0.85rem;
     border-radius: 999px;
-    color: var(--text-muted);
+    color: var(--mocha);
     font-family: var(--font-mono);
     font-size: 0.85rem;
     text-decoration: none;
     transition: color 0.2s, background 0.2s, transform 0.2s var(--ease-pop);
   }
   .nav-links a:hover {
-    color: var(--text);
+    color: var(--espresso);
     transform: translateY(-1px);
   }
   .nav-links a.is-active {
-    background: var(--yellow-soft);
-    color: var(--yellow);
+    background: var(--yellow);
+    color: var(--espresso);
+    font-weight: 700;
   }
 
   /* ---- Sections ---- */
   section {
-    max-width: 72rem;
+    max-width: 76rem;
     margin: 0 auto;
     padding: 5.5rem 1.5rem 2rem;
   }
@@ -247,21 +252,29 @@ const base = import.meta.env.BASE_URL;
   .section-kicker {
     font-family: var(--font-mono);
     font-size: 0.85rem;
-    color: var(--yellow);
+    color: var(--mocha);
     margin: 0 0 0.5rem;
   }
   .section-kicker::before {
     content: '// ';
-    opacity: 0.6;
+    color: var(--yellow);
+    -webkit-text-stroke: 0.5px var(--espresso);
   }
   .section-title {
     font-size: clamp(1.8rem, 4vw, 2.6rem);
     margin-bottom: 0.5rem;
   }
   .section-blurb {
-    color: var(--text-muted);
+    color: var(--mocha);
     max-width: 46rem;
     margin: 0 0 2rem;
+  }
+
+  /* yellow highlighter swipe, for a word or two */
+  .mark {
+    background: linear-gradient(100deg, var(--yellow-soft) 0%, var(--yellow) 4%, var(--yellow-soft) 96%);
+    border-radius: 0.3em 0.5em 0.4em 0.3em;
+    padding: 0 0.15em;
   }
 
   /* ---- Reveal motion ---- */
@@ -281,12 +294,13 @@ const base = import.meta.env.BASE_URL;
     margin-top: 4rem;
     padding: 2rem 1.5rem 2.5rem;
     text-align: center;
-    color: var(--text-muted);
+    color: var(--mocha);
     font-family: var(--font-mono);
     font-size: 0.85rem;
   }
   .footer-mark {
     color: var(--yellow);
+    -webkit-text-stroke: 1px var(--espresso);
     display: inline-block;
     animation: spin-slow 14s linear infinite;
   }

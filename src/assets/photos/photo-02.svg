@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
-<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#141a22"/><stop offset="1" stop-color="#1f2b33"/></linearGradient></defs>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#57431f"/><stop offset="1" stop-color="#2c2113"/></linearGradient></defs>
 <rect width="600" height="800" fill="url(#g)"/>
-<rect x="90" y="240" width="72" height="440.00000000000006" fill="#ffd60a" opacity="0.7"/><rect x="210" y="360" width="72" height="320" fill="#ffd60a" opacity="0.45"/><rect x="330" y="160" width="72" height="520" fill="#ffd60a" opacity="0.85"/>
-<text x="300" y="760" text-anchor="middle" font-family="Menlo, monospace" font-size="19" fill="#a1a0ab">city lines — replace me</text>
+<rect x="90" y="240" width="72" height="440.00000000000006" fill="#ffd60a" opacity="0.7"/><rect x="210" y="360" width="72" height="320" fill="#f7efe1" opacity="0.5"/><rect x="330" y="160" width="72" height="520" fill="#ffd60a" opacity="0.9"/>
+<text x="300" y="760" text-anchor="middle" font-family="Menlo, monospace" font-size="19" fill="#f7efe1" opacity="0.6">city lines — replace me</text>
 </svg>

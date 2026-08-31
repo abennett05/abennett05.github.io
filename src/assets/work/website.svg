@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7a5c33"/><stop offset="1" stop-color="#3a2a18"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#g)"/>
+    <circle cx="800" cy="414" r="144" fill="#ffd60a"/>
+    <rect x="1008" y="390" width="16" height="48" rx="8" fill="#ffd60a" transform="rotate(90 1016 414)"/><rect x="944.7350647362942" y="542.7350647362942" width="16" height="48" rx="8" fill="#ffd60a" transform="rotate(135 952.7350647362942 566.7350647362942)"/><rect x="792" y="606" width="16" height="48" rx="8" fill="#ffd60a" transform="rotate(180 800 630)"/><rect x="639.2649352637058" y="542.7350647362942" width="16" height="48" rx="8" fill="#ffd60a" transform="rotate(225 647.2649352637058 566.7350647362942)"/><rect x="576" y="390" width="16" height="48" rx="8" fill="#ffd60a" transform="rotate(270 584 414)"/><rect x="639.2649352637056" y="237.26493526370575" width="16" height="48" rx="8" fill="#ffd60a" transform="rotate(315 647.2649352637056 261.26493526370575)"/><rect x="792" y="174" width="16" height="48" rx="8" fill="#ffd60a" transform="rotate(360 800 198)"/><rect x="944.7350647362942" y="237.2649352637057" width="16" height="48" rx="8" fill="#ffd60a" transform="rotate(405 952.7350647362942 261.2649352637057)"/>
+<text x="800" y="765" text-anchor="middle" font-family="Menlo, monospace" font-size="30" fill="#f7efe1" opacity="0.55">placeholder — drop a real screenshot in src/assets/work/</text>
+</svg>

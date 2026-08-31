@@ -1,10 +1,20 @@
 /**
- * Add / remove / reorder your work here — the carousels on the page
- * render straight from these arrays. That's it, no other file to touch.
+ * Add / remove / reorder your work here — the showcase sliders render
+ * straight from these arrays.
  *
- * `links` is optional (omit it for anything that isn't public), and each
- * link gets its own button on the card. `emoji` is the card's big sticker.
+ * Each entry needs an image (the image does the talking): drop a file in
+ * src/assets/work/ (screenshots, 16:9-ish, ~1600px wide look best), import
+ * it below, and reference it. `links` is optional — omit it for anything
+ * that isn't public.
  */
+import type { ImageMetadata } from 'astro';
+
+import pipeline from '../assets/work/pipeline.svg';
+import tools from '../assets/work/tools.svg';
+import website from '../assets/work/website.svg';
+import platformer from '../assets/work/platformer.svg';
+import jam from '../assets/work/jam.svg';
+import boardgame from '../assets/work/boardgame.svg';
 
 export interface ProjectLink {
   label: string;
@@ -13,36 +23,40 @@ export interface ProjectLink {
 
 export interface Project {
   title: string;
+  subtitle: string;
   description: string;
   tags: string[];
-  emoji: string;
+  image: ImageMetadata;
   links?: ProjectLink[];
 }
 
 export const projects: Project[] = [
   {
     title: 'Data Pipeline Playground',
+    subtitle: 'Batch + streaming ETL sandbox',
     description:
-      'A batch + streaming ETL sandbox for wrangling messy real-world datasets into tidy, queryable shape. Built to learn fast and break things safely.',
+      'Wrangling messy real-world datasets into tidy, queryable shape. Built to learn fast and break things safely.',
     tags: ['Python', 'Airflow', 'PostgreSQL'],
-    emoji: '🛠️',
+    image: pipeline,
     links: [
       { label: 'GitHub', url: 'https://github.com/YOUR_GITHUB_USERNAME' },
     ],
   },
   {
     title: 'Quicomm Tools',
+    subtitle: 'Internal tooling & automation',
     description:
-      'Internal tooling and automation built for the day job — dashboards, report generators, and the little scripts that quietly save hours every week.',
+      'Dashboards, report generators, and the little scripts that quietly save hours every week.',
     tags: ['TypeScript', 'Node', 'Automation'],
-    emoji: '⚡',
+    image: tools,
   },
   {
     title: 'This Very Website',
+    subtitle: 'The portfolio you are looking at',
     description:
-      'The portfolio you are looking at right now. Astro, zero frameworks, a lot of yellow, and just enough motion to keep things interesting.',
+      'Astro, zero frameworks, a lot of coffee, and just enough motion to keep things interesting.',
     tags: ['Astro', 'CSS', 'Vanilla JS'],
-    emoji: '🌻',
+    image: website,
     links: [
       { label: 'Source', url: 'https://github.com/YOUR_GITHUB_USERNAME/Portfolio' },
     ],
@@ -52,20 +66,22 @@ export const projects: Project[] = [
 export const games: Project[] = [
   {
     title: 'Untitled Platformer',
+    subtitle: 'Precision platforming with a grappling hook',
     description:
-      'A tight little precision platformer about a bee with a grappling hook. Coyote time, buffered jumps, and all the juice — screen shake included.',
+      'A tight little game about a bee with a grappling hook. Coyote time, buffered jumps, and all the juice — screen shake included.',
     tags: ['Godot', 'GDScript', 'Pixel Art'],
-    emoji: '🐝',
+    image: platformer,
     links: [
       { label: 'Play on itch.io', url: 'https://itch.io' },
     ],
   },
   {
     title: 'Game Jam Grab Bag',
+    subtitle: '48-hour experiments, shipped anyway',
     description:
-      'A rotating collection of 48-hour jam entries. Some are gems, some are gloriously broken — every one of them taught me something new.',
+      'A rotating collection of jam entries. Some are gems, some are gloriously broken — every one taught me something new.',
     tags: ['Unity', 'C#', 'Game Jams'],
-    emoji: '🎲',
+    image: jam,
     links: [
       { label: 'itch.io', url: 'https://itch.io' },
       { label: 'GitHub', url: 'https://github.com/YOUR_GITHUB_USERNAME' },
@@ -73,9 +89,10 @@ export const games: Project[] = [
   },
   {
     title: 'Board Game Prototypes',
+    subtitle: 'Physical-first design experiments',
     description:
-      'Physical-first design experiments: cards, dice, and far too many laminated playtest sheets. Digital versions coming when they earn it.',
+      'Cards, dice, and far too many laminated playtest sheets. Digital versions coming when they earn it.',
     tags: ['Design', 'Prototyping'],
-    emoji: '🃏',
+    image: boardgame,
   },
 ];

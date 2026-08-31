@@ -1,6 +1,6 @@
 # Adrian Bennett — Portfolio
 
-A playful, dark-with-yellow portfolio built with [Astro](https://astro.build). No frameworks, just components, CSS, and a little vanilla JS.
+A morning-coffee-flavored portfolio built with [Astro](https://astro.build) — cream, tans, espresso browns, and a yellow accent. No frameworks, just components, CSS, and a little vanilla JS.
 
 ## Commands
 
@@ -13,31 +13,36 @@ A playful, dark-with-yellow portfolio built with [Astro](https://astro.build). N
 
 ## Editing content
 
-### Projects & games
+### Projects & games (showcase sliders)
 
 Everything lives in **`src/data/projects.ts`**. Each entry looks like:
 
 ```ts
 {
   title: 'My Cool Thing',
-  description: 'What it is and why it matters.',
+  subtitle: 'One-line hook',
+  description: 'Brief description shown over the image.',
   tags: ['Astro', 'TypeScript'],
-  emoji: '🚀',
+  image: myCoolThing, // imported at the top of the file
   links: [{ label: 'GitHub', url: 'https://github.com/...' }], // optional
 }
 ```
 
-Add, remove, or reorder entries in the `projects` or `games` arrays and the carousels update automatically.
+The image does the talking: drop a screenshot into **`src/assets/work/`** (16:9-ish, ~1600px wide looks best), import it at the top of `projects.ts`, and reference it. Add, remove, or reorder entries and the sliders update automatically. The current `.svg` files are labeled placeholders.
 
-### Photos
+### Hero polaroids
 
-Drop image files (`.jpg`, `.png`, `.webp`, …) into **`src/assets/photos/`** — every file in that folder appears in the gallery automatically, sorted by filename. Delete the placeholder `photo-*.svg` files once you've added real photos.
+The polaroid deck shuffles in sync with the rotating title. Images live in **`src/assets/polaroids/`**, paired to the roles in filename order (`01-…` → first role). Replace the placeholder SVGs with square-ish photos of you doing each thing. The roles themselves are the `roles` array in `src/components/Hero.astro`.
+
+### Photos (contact gallery)
+
+Drop image files (`.jpg`, `.png`, `.webp`, …) into **`src/assets/photos/`** — every file in that folder appears in the marquee automatically, sorted by filename. Delete the placeholder `photo-*.svg` files once you've added real photos.
 
 ### Everything else
 
-- Rotating hero titles: `src/components/Hero.astro` (the `roles` array)
-- About blurb & "hats": `src/components/About.astro`
+- Education & roles: `src/components/About.astro`
 - Contact links: `src/components/Gallery.astro` (the `contacts` array — replace the `YOUR_GITHUB_USERNAME` / `YOUR_LINKEDIN` placeholders)
+- Colors: the `:root` variables in `src/layouts/Layout.astro`
 
 ## Deploying to GitHub Pages
 
