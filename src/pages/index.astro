@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Carousel from '../components/Carousel.astro';
+import Gallery from '../components/Gallery.astro';
+import { projects, games } from '../data/projects';
+---
+
+<Layout>
+  <Hero />
+  <About />
+  <Carousel
+    id="projects"
+    kicker="projects"
+    title="Things I've built."
+    blurb="Software, data, and the occasional business experiment. Swipe or use the arrows — there's more than fits on screen."
+    items={projects}
+  />
+  <Carousel
+    id="games"
+    kicker="games"
+    title="Things you can play."
+    blurb="Games are where code gets to be fun on purpose. A mix of finished jams, prototypes, and works in progress."
+    items={games}
+  />
+  <Gallery />
+</Layout>

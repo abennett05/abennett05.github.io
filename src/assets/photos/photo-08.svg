@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d1522"/><stop offset="1" stop-color="#2b2033"/></linearGradient></defs>
+<rect width="800" height="800" fill="url(#g)"/>
+<path d="M0 480 Q 200 320 400 480 T 800 480" stroke="#ffd60a" stroke-width="16" fill="none" opacity="0.85"/>
+<text x="400" y="760" text-anchor="middle" font-family="Menlo, monospace" font-size="26" fill="#a1a0ab">macro — replace me</text>
+</svg>

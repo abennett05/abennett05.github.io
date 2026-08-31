@@ -1,0 +1,187 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  id: string;
+  kicker: string;
+  title: string;
+  blurb: string;
+  items: Project[];
+}
+
+const { id, kicker, title, blurb, items } = Astro.props;
+---
+
+<section id={id}>
+  <div data-reveal>
+    <p class="section-kicker">{kicker}</p>
+    <h2 class="section-title">{title}</h2>
+    <p class="section-blurb">{blurb}</p>
+  </div>
+
+  <div class="carousel" data-reveal>
+    <ul class="carousel-track" tabindex="0" aria-label={`${title} carousel`}>
+      {items.map((item, i) => (
+        <li class="card" style={`--tilt: ${i % 2 === 0 ? '-0.5deg' : '0.5deg'}`}>
+          <span class="card-emoji" aria-hidden="true">{item.emoji}</span>
+          <h3 class="card-title">{item.title}</h3>
+          <p class="card-desc">{item.description}</p>
+          <ul class="card-tags" aria-label="Technologies">
+            {item.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+          {item.links && item.links.length > 0 && (
+            <div class="card-links">
+              {item.links.map((link) => (
+                <a href={link.url} target="_blank" rel="noopener">
+                  {link.label} ↗
+                </a>
+              ))}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+
+    <div class="carousel-nav">
+      <button class="carousel-btn" data-dir="-1" aria-label={`Previous ${kicker}`}>←</button>
+      <button class="carousel-btn" data-dir="1" aria-label={`Next ${kicker}`}>→</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.carousel').forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>('.carousel-track');
+    if (!track) return;
+
+    carousel.querySelectorAll<HTMLButtonElement>('.carousel-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const card = track.querySelector<HTMLElement>('.card');
+        const step = card ? card.offsetWidth + 16 : track.clientWidth * 0.8;
+        track.scrollBy({ left: step * Number(btn.dataset.dir), behavior: 'smooth' });
+      });
+    });
+  });
+</script>
+
+<style>
+  .carousel {
+    position: relative;
+  }
+
+  .carousel-track {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0.25rem 1.25rem;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+  .carousel-track:focus-visible {
+    outline: 2px solid var(--yellow);
+    outline-offset: 4px;
+    border-radius: var(--radius);
+  }
+
+  .card {
+    flex: 0 0 min(21rem, 82vw);
+    scroll-snap-align: start;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    transition: transform 0.3s var(--ease-pop), border-color 0.3s, box-shadow 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-5px) rotate(var(--tilt));
+    border-color: var(--yellow);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+  }
+
+  .card-emoji {
+    font-size: 2.1rem;
+    line-height: 1;
+  }
+  .card-title {
+    font-size: 1.25rem;
+  }
+  .card-desc {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    flex-grow: 1;
+  }
+
+  .card-tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .card-tags li {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--yellow);
+    background: var(--yellow-soft);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+  }
+  .card-links a {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.35rem 0.8rem;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s var(--ease-pop);
+  }
+  .card-links a:hover {
+    border-color: var(--yellow);
+    color: var(--yellow);
+    transform: translateY(-2px);
+  }
+
+  .carousel-nav {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+  .carousel-btn {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--text);
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    width: 2.6rem;
+    height: 2.6rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s var(--ease-pop);
+  }
+  .carousel-btn:hover {
+    border-color: var(--yellow);
+    color: var(--yellow);
+    transform: translateY(-2px);
+  }
+  .carousel-btn:active {
+    transform: translateY(0) scale(0.95);
+  }
+</style>

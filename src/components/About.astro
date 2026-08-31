@@ -1,0 +1,71 @@
+---
+const hats = [
+  { emoji: '🧠', label: 'Computer Scientist', note: 'algorithms & systems thinking' },
+  { emoji: '📊', label: 'Data Engineer', note: 'pipelines that just keep humming' },
+  { emoji: '🕹️', label: 'Game Developer', note: 'juice, feel, and fun first' },
+  { emoji: '🚀', label: 'Entrepreneur', note: 'shipping beats perfect' },
+  { emoji: '📷', label: 'Photographer', note: 'chasing light on weekends' },
+];
+---
+
+<section id="about">
+  <div data-reveal>
+    <p class="section-kicker">about</p>
+    <h2 class="section-title">One person, five hats.</h2>
+    <p class="section-blurb">
+      I'm Adrian — a builder at heart. By day I wrangle data and write software;
+      by night I make games, chase business ideas, and take my camera places it
+      probably shouldn't go. I like tools that feel good, code that reads well,
+      and projects that ship.
+    </p>
+  </div>
+
+  <ul class="hats">
+    {hats.map((hat, i) => (
+      <li class="hat" data-reveal data-reveal-delay={i * 70}>
+        <span class="hat-emoji" aria-hidden="true">{hat.emoji}</span>
+        <span class="hat-label">{hat.label}</span>
+        <span class="hat-note">{hat.note}</span>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .hats {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1rem;
+  }
+  .hat {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.3rem;
+    display: grid;
+    gap: 0.15rem;
+    transition: transform 0.3s var(--ease-pop), border-color 0.3s,
+      opacity 0.6s ease;
+  }
+  .hat:hover {
+    transform: translateY(-4px) rotate(-0.6deg);
+    border-color: var(--yellow);
+  }
+  .hat:nth-child(even):hover {
+    transform: translateY(-4px) rotate(0.6deg);
+  }
+  .hat-emoji {
+    font-size: 1.6rem;
+  }
+  .hat-label {
+    font-weight: 700;
+  }
+  .hat-note {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+</style>
