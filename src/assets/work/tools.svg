@@ -3,5 +3,4 @@
 <rect width="1600" height="900" fill="url(#g)"/>
     <rect x="480" y="270" width="640" height="360" rx="20" fill="none" stroke="#f7efe1" stroke-width="6" opacity="0.8"/>
     <path d="M 608 450 L 752 540 L 1008 342" stroke="#ffd60a" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="800" y="765" text-anchor="middle" font-family="Menlo, monospace" font-size="30" fill="#f7efe1" opacity="0.55">placeholder — drop a real screenshot in src/assets/work/</text>
 </svg>

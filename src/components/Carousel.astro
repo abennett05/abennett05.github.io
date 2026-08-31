@@ -14,18 +14,12 @@ const { id, kicker, title, blurb, items } = Astro.props;
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
-<section id={id}>
-  <div data-reveal>
-    <p class="section-kicker">{kicker}</p>
-    <h2 class="section-title">{title}</h2>
-    <p class="section-blurb">{blurb}</p>
-  </div>
-
+<section id={id} class="showcase-section">
   <div class="showcase" data-reveal>
     <ul class="showcase-track" tabindex="0" aria-label={`${title} slides`}>
       {items.map((item) => (
         <li class="slide">
-          <Image src={item.image} alt={item.title} class="slide-img" width={1600} />
+          <Image src={item.image} alt={item.title} class="slide-img" width={1920} />
           <div class="slide-scrim" aria-hidden="true"></div>
           <div class="slide-info">
             <h3 class="slide-title">{item.title}</h3>
@@ -49,6 +43,12 @@ const pad = (n: number) => String(n).padStart(2, '0');
         </li>
       ))}
     </ul>
+
+    <header class="showcase-header">
+      <p class="showcase-kicker">{kicker}</p>
+      <h2 class="showcase-title">{title}</h2>
+      <p class="showcase-blurb">{blurb}</p>
+    </header>
 
     <div class="showcase-ui">
       <span class="showcase-count" aria-live="polite">
@@ -89,6 +89,14 @@ const pad = (n: number) => String(n).padStart(2, '0');
 </script>
 
 <style>
+  /* full-bleed: escape the global section container */
+  .showcase-section {
+    max-width: none;
+    padding: 0;
+    margin: 3.5rem 0 0;
+    scroll-margin-top: 0;
+  }
+
   .showcase {
     position: relative;
   }
@@ -101,23 +109,20 @@ const pad = (n: number) => String(n).padStart(2, '0');
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    border-radius: var(--radius);
-    border: 1px solid var(--line);
-    box-shadow: 0 18px 44px rgba(50, 38, 26, 0.18);
   }
   .showcase-track::-webkit-scrollbar {
     display: none;
   }
   .showcase-track:focus-visible {
     outline: 3px solid var(--yellow);
-    outline-offset: 4px;
+    outline-offset: -3px;
   }
 
   .slide {
     position: relative;
     flex: 0 0 100%;
     scroll-snap-align: start;
-    height: clamp(24rem, 64vh, 36rem);
+    height: 100svh;
     overflow: hidden;
   }
 
@@ -129,30 +134,69 @@ const pad = (n: number) => String(n).padStart(2, '0');
     object-fit: cover;
   }
 
-  /* gradient so the text reads over any image */
+  /* gradients top and bottom so the header and info read over any image */
   .slide-scrim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to top,
-      rgba(31, 21, 12, 0.92) 0%,
-      rgba(31, 21, 12, 0.55) 32%,
-      rgba(31, 21, 12, 0) 62%
-    );
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(31, 21, 12, 0.78) 0%,
+        rgba(31, 21, 12, 0.35) 18%,
+        rgba(31, 21, 12, 0) 38%
+      ),
+      linear-gradient(
+        to top,
+        rgba(31, 21, 12, 0.94) 0%,
+        rgba(31, 21, 12, 0.55) 26%,
+        rgba(31, 21, 12, 0) 55%
+      );
   }
 
+  /* ---- section header, overlaid top left ---- */
+  .showcase-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 5.5rem clamp(1.3rem, 4vw, 3rem) 0;
+    color: var(--cream);
+    pointer-events: none;
+  }
+  .showcase-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: rgba(253, 250, 242, 0.75);
+    margin: 0 0 0.4rem;
+  }
+  .showcase-kicker::before {
+    content: '// ';
+    color: var(--yellow);
+  }
+  .showcase-title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: #fdfaf2;
+  }
+  .showcase-blurb {
+    color: rgba(253, 250, 242, 0.75);
+    max-width: 40rem;
+    margin: 0.5rem 0 0;
+    font-size: 0.98rem;
+  }
+
+  /* ---- per-slide info, bottom left ---- */
   .slide-info {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 1.8rem 2rem;
+    padding: 1.8rem clamp(1.3rem, 4vw, 3rem) 2.2rem;
     /* leave room for the arrows */
-    padding-right: clamp(9rem, 16vw, 12rem);
+    padding-right: clamp(9rem, 16vw, 13rem);
     color: var(--cream);
   }
   .slide-title {
-    font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+    font-size: clamp(1.6rem, 3.6vw, 2.6rem);
     color: #fdfaf2;
   }
   .slide-sub {
@@ -160,9 +204,9 @@ const pad = (n: number) => String(n).padStart(2, '0');
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
-    margin: 0.5rem 0 0;
+    margin: 0.55rem 0 0;
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: 0.84rem;
   }
   .slide-subtitle {
     color: var(--yellow);
@@ -174,17 +218,17 @@ const pad = (n: number) => String(n).padStart(2, '0');
     color: rgba(253, 250, 242, 0.85);
   }
   .slide-desc {
-    margin: 0.6rem 0 0;
-    max-width: 34rem;
-    font-size: 0.95rem;
+    margin: 0.65rem 0 0;
+    max-width: 36rem;
+    font-size: 0.98rem;
     color: rgba(253, 250, 242, 0.82);
   }
   .slide-links {
-    margin: 0.7rem 0 0;
+    margin: 0.75rem 0 0;
     display: flex;
     gap: 1.1rem;
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.88rem;
   }
   .slide-links a {
     color: #fdfaf2;
@@ -198,8 +242,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
   /* ---- bare-bones UI: counter + arrows, bottom right ---- */
   .showcase-ui {
     position: absolute;
-    right: 1.4rem;
-    bottom: 1.4rem;
+    right: clamp(1.3rem, 4vw, 3rem);
+    bottom: 2.2rem;
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -231,15 +275,18 @@ const pad = (n: number) => String(n).padStart(2, '0');
   }
 
   @media (max-width: 640px) {
-    .slide {
-      height: clamp(22rem, 70vh, 30rem);
+    .showcase-header {
+      padding-top: 4.6rem;
+    }
+    .showcase-blurb {
+      display: none;
     }
     .slide-info {
-      padding: 1.3rem 1.3rem 4.4rem;
+      padding-bottom: 5.2rem;
+      padding-right: clamp(1.3rem, 4vw, 3rem);
     }
     .showcase-ui {
-      right: 1rem;
-      bottom: 1rem;
+      bottom: 1.2rem;
     }
   }
 </style>

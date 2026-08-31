@@ -3,5 +3,4 @@
 <rect width="1600" height="900" fill="url(#g)"/>
     <rect x="320" y="558" width="224.00000000000003" height="45" rx="10" fill="#f7efe1" opacity="0.8"/><rect x="672.0000000000001" y="450" width="224.00000000000003" height="45" rx="10" fill="#f7efe1" opacity="0.8"/><rect x="1024" y="342" width="224.00000000000003" height="45" rx="10" fill="#f7efe1" opacity="0.8"/>
     <circle cx="463.99999999999994" cy="486.00000000000006" r="45" fill="#ffd60a"/>
-<text x="800" y="765" text-anchor="middle" font-family="Menlo, monospace" font-size="30" fill="#f7efe1" opacity="0.55">placeholder — drop a real screenshot in src/assets/work/</text>
 </svg>
