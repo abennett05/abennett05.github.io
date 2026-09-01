@@ -97,13 +97,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
     scroll-margin-top: 0;
   }
 
-  /* consecutive showcases: keep the breathing room but paint it dark, so
-     one slide's bottom gradient flows into the next one's top instead of
-     flashing the cream background between them */
-  /* (~ not +: Astro can inject a <script> element between the sections) */
+  /* consecutive showcases: bunch together for unity */
   .showcase-section ~ .showcase-section {
     margin-top: 0;
-    padding-top: 3.5rem;
+    padding-top: 0rem;
     background: var(--roast);
   }
 
