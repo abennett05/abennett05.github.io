@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 import type { ImageMetadata } from 'astro';
 
 /**
@@ -18,11 +19,12 @@ const photos = Object.entries(photoModules)
 const rowA = photos.filter((_, i) => i % 2 === 0);
 const rowB = photos.filter((_, i) => i % 2 === 1);
 
+// `icon` is a Phosphor name — browse the set at https://phosphoricons.com
 const contacts = [
-  { label: 'Email', url: 'mailto:adrian@quicomm.com', icon: '✉️' },
-  { label: 'GitHub', url: 'https://github.com/abennett05', icon: '🐙' },
-  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/adrian-bennett-76147332a/', icon: '💼' },
-  { label: 'Dead Tag Studios', url: 'https://deadtag.studio/games', icon: '🎮' },
+  { label: 'Email', url: 'mailto:adrian@quicomm.com', icon: 'ph:envelope-simple' },
+  { label: 'GitHub', url: 'https://github.com/abennett05', icon: 'ph:github-logo' },
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/adrian-bennett-76147332a/', icon: 'ph:linkedin-logo' },
+  { label: 'Dead Tag Studios', url: 'https://deadtag.studio/games', icon: 'ph:game-controller' },
 ];
 ---
 
@@ -31,14 +33,14 @@ const contacts = [
     <p class="section-kicker">contact / gallery</p>
     <h2 class="section-title">Say hello. Stay for the photos.</h2>
     <p class="section-blurb">
-      The best way to reach me is by email. While you're here, feel free to check out more of my projects on Github, 
+      The best way to reach me is via <b>email</b>. Though while you're here, feel free to check out more of my projects on Github, 
       connect with me on LinkedIn, 
       or even take a gander at the games I make over at Dead Tag Studios. Don't forget about my photos below!
     </p>
     <div class="contact-links">
       {contacts.map((c) => (
         <a href={c.url} target={c.url.startsWith('mailto:') ? undefined : '_blank'} rel="noopener">
-          <span aria-hidden="true">{c.icon}</span> {c.label}
+          <Icon name={c.icon} class="contact-icon" aria-hidden="true" /> {c.label}
         </a>
       ))}
     </div>
@@ -185,6 +187,9 @@ const contacts = [
     gap: 0.7rem;
   }
   .contact-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
     font-family: var(--font-mono);
     font-size: 0.92rem;
     color: var(--espresso);
@@ -198,6 +203,13 @@ const contacts = [
   .contact-links a:hover {
     background: var(--yellow);
     transform: translateY(-3px) rotate(-1deg);
+  }
+  /* Icons take the link's colour and scale with its text, so there is nothing
+     to restyle if the palette or font size changes. */
+  .contact-links :global(.contact-icon) {
+    width: 1.15em;
+    height: 1.15em;
+    flex: none;
   }
 
   /* ---- Marquee ---- */
