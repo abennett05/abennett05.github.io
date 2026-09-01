@@ -9,11 +9,14 @@
  */
 import type { ImageMetadata } from 'astro';
 
-import pipeline from '../assets/work/pipeline.svg';
-import tools from '../assets/work/tools.svg';
-import website from '../assets/work/website.svg';
+import invoice_pay from '../assets/work/pipeline.svg';
+import modem from '../assets/work/modem.gif';
+import ISObe from '../assets/work/isobe.jpg';
+import tags_near_you from '../assets/work/pipeline.svg';
+import birdhaus from '../assets/work/birdhaus.gif';
 import jousting_around from '../assets/work/jousting_around.jpg';
 import knight_owl from '../assets/work/knight-owl.gif';
+import double_exposure from '../assets/work/double-exposure.gif';
 import scrap_rats from '../assets/work/scrap_rats_concept.png';
 
 export interface ProjectLink {
@@ -32,33 +35,52 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'Data Pipeline Playground',
-    subtitle: 'Batch + streaming ETL sandbox',
+    title: 'MODEM',
+    subtitle: 'Physical device built to reconnect people',
     description:
-      'Wrangling messy real-world datasets into tidy, queryable shape. Built to learn fast and break things safely.',
-    tags: ['Python', 'Airflow', 'PostgreSQL'],
-    image: pipeline,
+      'Today, it is easier than ever to feel alone in a room full of people. Phones are a constant attention grab that pull people away from one another. MODEM seeks to fix this by not only disabling phones but making it social. Up to 6 people simply tap their phone to the device, enrolling them in a session. Once in a session, phones are locked & users compete for the least pick ups. In case of an emergency, the device individually notifies a user.',
+    tags: ['C++', 'Flutter', 'Mobile', 'Embedded'],
+    image: modem,
     links: [
-      { label: 'GitHub', url: 'https://github.com/YOUR_GITHUB_USERNAME' },
+      { label: 'Website', url: 'https://abennett05.github.io/modem_web/'}
+    ]
+  },
+  {
+    title: 'Tags Near You',
+    subtitle: 'Accurate RFID tag localization',
+    description:
+      'Developed at Auburn University\'s RFID Lab. By training a machine learning model based on positional and temporal data paired with RSSI values, we were able to accurately predict the location of RFID tags.',
+    tags: ['XR', 'Machine Learning', 'RFID'],
+    image: tags_near_you,
+  },
+  {
+    title: 'InvoicePay',
+    subtitle: 'All-in-one invoice management solution',
+    description:
+      'Crafted for businesses who wish to modernize their invoice payment process. Send, manage, and close out invoices in your ERP all from one web dashboard. Built to be scalable and fit the needs of any business',
+    tags: ['React', 'TS', 'MySQL', 'Docker'],
+    image: invoice_pay,
+  },
+  {
+    title: 'BirdHaus',
+    subtitle: 'AI-powered smart birdhouse',
+    description:
+      'Developed in 36 hours at the Purdue Humanoid Robotic Club\'s Hackathon, BirdHaus was designed to stop squirrels from stealing birdfeed. It accomplished this with a computer vision model trained on squirrels, when a squirrel was detected the feeder closed. Future plans saw a mobile companion app that could log bird species that visited your feeder.',
+    tags: ['C++', 'Machine Learning', 'Edge Computing', 'Hackathon'],
+    image: birdhaus,
+    links: [
+      { label: 'Demo', url: 'https://youtu.be/bLPc5ft7LDM'},
     ],
   },
   {
-    title: 'Quicomm Tools',
-    subtitle: 'Internal tooling & automation',
+    title: 'ISObe',
+    subtitle: 'Organize your retro console library from any device in your home.',
     description:
-      'Dashboards, report generators, and the little scripts that quietly save hours every week.',
-    tags: ['TypeScript', 'Node', 'Automation'],
-    image: tools,
-  },
-  {
-    title: 'This Very Website',
-    subtitle: 'The portfolio you are looking at',
-    description:
-      'Astro, zero frameworks, a lot of coffee, and just enough motion to keep things interesting.',
-    tags: ['Astro', 'CSS', 'Vanilla JS'],
-    image: website,
+      'Playing games on retro consoles is great, apart from the storage aspect. ISObe solves this by providing a digital library that gamer\'s expect from modern systems. Additionally, manage your entire retro library from any device in your home. Next time you boot up your console, your games are ready to go!',
+    tags: ['React', 'TS', 'Python', 'MySQL'],
+    image: ISObe,
     links: [
-      { label: 'Source', url: 'https://github.com/YOUR_GITHUB_USERNAME/Portfolio' },
+      { label: 'Github', url: 'https://github.com/abennett05/isobe' },
     ],
   },
 ];
@@ -66,7 +88,7 @@ export const projects: Project[] = [
 export const games: Project[] = [
   {
     title: 'Jousting Around',
-    subtitle: 'Silly physics based 1v1 jousting game.',
+    subtitle: 'Whimsy physics based 1v1 jousting game.',
     description:
       'Face off with a friend to win the oddly-humoured goblin king\'s favor. This was the first project where I handled all visual elements, it proved to be the confidence builder I needed to publish games.',
     tags: ['PvP', 'C#', 'Built with Unity'],
@@ -77,11 +99,22 @@ export const games: Project[] = [
   },
   {
     title: 'Knight Owl',
-    subtitle: '2.5D FPS Experiment',
+    subtitle: '2.5D FPS experiment',
     description:
       'Developed within a week, I wanted to challenge myself to develop a unique FPS inspired by the likes of Doom & Hotline Miami. Albeit unfinished, this project taught me to prioritize essentials and the benefit of \'newtonian\' design. That is where I find it much easier to get work done when the ball is already moving.',
     tags: ['Level Design', 'Prototyping', 'Built with Godot'],
     image: knight_owl,
+  },
+  {
+    title: 'Double Exposure',
+    subtitle: 'Intriguing mystery puzzler',
+    description:
+      'Inspired by Valve\'s Portal franchise, you find yourself wielding an unworldly camera capable of physically capturing objects in its view. Unravel the mystery that awaits, one photo at a time.',
+    tags: ['Puzzle', 'Narrative','Built with Godot'],
+    image: double_exposure,
+    links: [
+      {label: 'Watch Dev Blog', url: 'https://youtu.be/w0hCYkbVqBU'}
+    ]
   },
   {
     title: 'Scrap Rats',
