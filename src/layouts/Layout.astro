@@ -123,6 +123,14 @@ const base = import.meta.env.BASE_URL;
     scroll-behavior: smooth;
   }
 
+  /* the polaroid fly-out animation briefly extends past the viewport edge;
+     clip it so it never spawns a horizontal scrollbar */
+  html,
+  body {
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+
   body {
     margin: 0;
     background: var(--cream);
