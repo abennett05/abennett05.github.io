@@ -9,7 +9,7 @@
  */
 import type { ImageMetadata } from 'astro';
 
-import invoice_pay from '../assets/work/pipeline.svg';
+import invoice_pay from '../assets/work/invoice_pay.png';
 import modem from '../assets/work/modem.gif';
 import ISObe from '../assets/work/isobe.jpg';
 import tags_near_you from '../assets/work/pipeline.svg';
