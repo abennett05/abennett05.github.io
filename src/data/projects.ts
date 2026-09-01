@@ -12,9 +12,9 @@ import type { ImageMetadata } from 'astro';
 import pipeline from '../assets/work/pipeline.svg';
 import tools from '../assets/work/tools.svg';
 import website from '../assets/work/website.svg';
-import platformer from '../assets/work/platformer.svg';
-import jam from '../assets/work/jam.svg';
-import boardgame from '../assets/work/boardgame.svg';
+import jousting_around from '../assets/work/jousting_around.jpg';
+import knight_owl from '../assets/work/knight-owl.gif';
+import scrap_rats from '../assets/work/scrap_rats_concept.png';
 
 export interface ProjectLink {
   label: string;
@@ -65,34 +65,30 @@ export const projects: Project[] = [
 
 export const games: Project[] = [
   {
-    title: 'Untitled Platformer',
-    subtitle: 'Precision platforming with a grappling hook',
+    title: 'Jousting Around',
+    subtitle: 'Silly physics based 1v1 jousting game.',
     description:
-      'A tight little game about a bee with a grappling hook. Coyote time, buffered jumps, and all the juice — screen shake included.',
-    tags: ['Godot', 'GDScript', 'Pixel Art'],
-    image: platformer,
+      'Face off with a friend to win the oddly-humoured goblin king\'s favor. This was the first project where I handled all visual elements, it proved to be the confidence builder I needed to publish games.',
+    tags: ['PvP', 'C#', 'Built with Unity'],
+    image: jousting_around,
     links: [
-      { label: 'Play on itch.io', url: 'https://itch.io' },
+      { label: 'Play on Steam', url: 'https://store.steampowered.com/app/4983950/Jousting_Around/' },
     ],
   },
   {
-    title: 'Game Jam Grab Bag',
-    subtitle: '48-hour experiments, shipped anyway',
+    title: 'Knight Owl',
+    subtitle: '2.5D FPS Experiment',
     description:
-      'A rotating collection of jam entries. Some are gems, some are gloriously broken — every one taught me something new.',
-    tags: ['Unity', 'C#', 'Game Jams'],
-    image: jam,
-    links: [
-      { label: 'itch.io', url: 'https://itch.io' },
-      { label: 'GitHub', url: 'https://github.com/YOUR_GITHUB_USERNAME' },
-    ],
+      'Developed within a week, I wanted to challenge myself to develop a unique FPS inspired by the likes of Doom & Hotline Miami. Albeit unfinished, this project taught me to prioritize essentials and the benefit of \'newtonian\' design. That is where I find it much easier to get work done when the ball is already moving.',
+    tags: ['Level Design', 'Prototyping', 'Built with Godot'],
+    image: knight_owl,
   },
   {
-    title: 'Board Game Prototypes',
-    subtitle: 'Physical-first design experiments',
+    title: 'Scrap Rats',
+    subtitle: 'Escape the Rat Race to keep the people entertained.',
     description:
-      'Cards, dice, and far too many laminated playtest sheets. Digital versions coming when they earn it.',
-    tags: ['Design', 'Prototyping'],
-    image: boardgame,
+      'Currently in development @ Dead Tag Studios. Team up with 3 other players to escape a hostile procedurally generated maze. With little to fight back with, teamwork and strategy is necessary for survival.',
+    tags: ['Co-Op', 'Action', 'Built with Unity'],
+    image: scrap_rats,
   },
 ];
