@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
-<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#66502c"/><stop offset="1" stop-color="#302514"/></linearGradient></defs>
-<rect width="900" height="600" fill="url(#g)"/>
-<polygon points="450,150 630,420 270,420" fill="#ffd60a" opacity="0.8"/>
-<text x="450" y="560" text-anchor="middle" font-family="Menlo, monospace" font-size="29" fill="#f7efe1" opacity="0.6">wide open — replace me</text>
-</svg>

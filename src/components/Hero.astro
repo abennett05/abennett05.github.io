@@ -8,7 +8,7 @@ import type { ImageMetadata } from 'astro';
  * photos of you doing each thing (square-ish crops look best).
  */
 const polaroidModules = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/polaroids/*.{jpg,jpeg,png,webp,svg}',
+  '../assets/polaroids/*.{jpg,jpeg,gif,png,webp,svg}',
   { eager: true }
 );
 const polaroidImages = Object.entries(polaroidModules)
@@ -32,7 +32,7 @@ const deck = roles.map((role, i) => ({
 <section id="top" class="hero" aria-label="Intro">
   <div class="hero-inner">
     <div class="hero-text">
-      <p class="hero-hello">// hello, world — I'm</p>
+      <p class="hero-hello">// Hey there, I'm</p>
       <h1 class="hero-name">
         Adrian<br />Bennett<span class="hero-dot">.</span>
       </h1>
