@@ -7,6 +7,6 @@ export default defineConfig({
   //  - `site` is your Pages URL. Replace YOUR_GITHUB_USERNAME.
   //  - `base` is the repo name. If you deploy to a *user* site repo
   //    (YOUR_GITHUB_USERNAME.github.io), delete the `base` line entirely.
-  site: 'https://YOUR_GITHUB_USERNAME.github.io',
-  base: '/Portfolio',
+  site: 'https://abennett05.github.io',
+  base: '/portfolio',
 });
