@@ -4,12 +4,10 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  // GitHub Pages setup:
-  //  - `site` is your Pages URL. Replace YOUR_GITHUB_USERNAME.
-  //  - `base` is the repo name. If you deploy to a *user* site repo
-  //    (YOUR_GITHUB_USERNAME.github.io), delete the `base` line entirely.
+  // GitHub Pages: this deploys to the *user site* repo (abennett05.github.io),
+  // which is served from the domain root — so there is no `base` to set.
+  // A project-site repo (e.g. abennett05/portfolio) would need base: '/portfolio'.
   site: 'https://abennett05.github.io',
-  base: '/portfolio',
 
   // Phosphor icons. `<Icon name="ph:github-logo" />` inlines the SVG at build
   // time — no icon font and no extra request.
