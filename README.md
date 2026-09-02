@@ -1,7 +1,6 @@
 # Adrian Bennett — Portfolio
 
-A morning-coffee-flavored portfolio built with [Astro](https://astro.build) — cream, tans, espresso browns, and a yellow accent. No frameworks, just components, CSS, and a little vanilla JS.
-
+A morning-coffee-flavored portfolio built with [Astro](https://astro.build)
 ## Commands
 
 | Command           | Action                                       |
