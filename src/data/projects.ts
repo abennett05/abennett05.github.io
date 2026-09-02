@@ -96,9 +96,9 @@ export const projects: Project[] = [
   },
   {
     title: 'ISObe',
-    subtitle: 'Organize your retro console library from any device in your home.',
+    subtitle: 'Organize your retro console library from any device in your home',
     description:
-      'Playing games on retro consoles is great, apart from the storage aspect. ISObe solves this by providing a digital library that gamer\'s expect from modern systems. Additionally, manage your entire retro library from any device in your home. Next time you boot up your console, your games are ready to go!',
+      'Playing games on retro consoles is great, apart from the storage aspect. ISObe solves this by providing a digital library that gamers expect from modern systems. Additionally, ISObe enables management of your entire retro library from any device in your home. Next time you boot up your console, your games are ready to go!',
     tags: ['React', 'TS', 'Python', 'SQLite'],
     image: ISObe,
     links: [
@@ -110,7 +110,7 @@ export const projects: Project[] = [
 export const games: Project[] = [
   {
     title: 'Jousting Around',
-    subtitle: 'Whimsy physics based 1v1 jousting game.',
+    subtitle: 'Whimsy physics based 1v1 jousting game',
     description:
       'Face off with a friend to win the oddly-humoured goblin king\'s favor. This was the first project where I handled all visual elements, it proved to be the confidence builder I needed to publish games.',
     tags: ['PvP', 'C#', 'Built with Unity'],
@@ -142,9 +142,9 @@ export const games: Project[] = [
   },
   {
     title: 'Scrap Rats',
-    subtitle: 'Escape the Rat Race to keep the people entertained.',
+    subtitle: 'Escape the Rat Race to keep the people entertained',
     description:
-      'Currently in development @ <a target="_blank" rel="noopener noreferrer" href="https://deadtag.studio/games">Dead Tag Studios</a>. Team up with 3 other players to escape a hostile procedurally generated maze. With little to fight back with, teamwork and strategy is necessary for survival.',
+      'Currently in development at <a target="_blank" rel="noopener noreferrer" href="https://deadtag.studio/games">Dead Tag Studios</a>. Team up with 3 other players to escape a hostile procedurally generated maze. With little to fight back with, teamwork and strategy is necessary for survival.',
     tags: ['Co-Op', 'Action', 'Built with Unity'],
     image: scrap_rats,
   },
