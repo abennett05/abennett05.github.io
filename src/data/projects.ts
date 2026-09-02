@@ -123,7 +123,7 @@ export const games: Project[] = [
     title: 'Knight Owl',
     subtitle: '2.5D FPS experiment',
     description:
-      'Developed within a week, I wanted to challenge myself to develop a unique FPS inspired by the likes of Doom & Hotline Miami. Albeit unfinished, this project taught me to prioritize essentials and the benefit of \'newtonian\' design. That is where I find it much easier to get work done when the ball is already moving.',
+      'Developed within a week, I wanted to challenge myself to develop a unique FPS inspired by the likes of Doom & Hotline Miami. Albeit unfinished, this project taught me to prioritize essentials and the benefit of \'newtonian\' design. That is where I find it far easier to iterate once things are already in motion.',
     tags: ['Level Design', 'Prototyping', 'Built with Godot'],
     image: knight_owl,
     video: ['work/knight-owl.webm', 'work/knight-owl.mp4'],
