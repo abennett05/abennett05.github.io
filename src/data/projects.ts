@@ -30,7 +30,7 @@ import birdhaus from '../assets/work/birdhaus-poster.png';
 import jousting_around from '../assets/work/jousting_around-poster.png';
 import knight_owl from '../assets/work/knight-owl-poster.png';
 import double_exposure from '../assets/work/double-exposure-poster.png';
-import scrap_rats from '../assets/work/scrap_rats_concept.png';
+import scrap_rats from '../assets/work/scrap-rats-poster.png';
 
 export interface ProjectLink {
   label: string;
@@ -148,5 +148,6 @@ export const games: Project[] = [
       'Currently in development at <a target="_blank" rel="noopener noreferrer" href="https://deadtag.studio/games">Dead Tag Studios</a>. Team up with 3 other players to escape a hostile procedurally generated maze. With little to fight back with, teamwork and strategy is necessary for survival.',
     tags: ['Co-Op', 'Action', 'Built with Unity'],
     image: scrap_rats,
+    video: ['work/scrap-rats.webm']
   },
 ];

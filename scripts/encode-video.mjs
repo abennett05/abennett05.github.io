@@ -1,7 +1,8 @@
 /**
- * GIF -> webm/mp4 + poster frame, for the carousel's `video` field.
+ * GIF or screen-recording -> webm/mp4 + poster frame, for the carousel's `video` field.
  *
- * Reads every GIF in src/assets/work/ and writes, for each one:
+ * Reads every clip in src/assets/work/ (.gif, .mov, .mp4, .m4v, .webm) and
+ * writes, for each one:
  *   public/work/<name>.webm            the looping background video
  *   public/work/<name>.mp4             fallback for older Safari (--mp4)
  *   src/assets/work/<name>-poster.png  first frame, for the `image` field
@@ -10,11 +11,12 @@
  * anything imported from there, while public/ is copied through untouched,
  * which is what a video wants.
  *
- * Usage:  npm run video            all GIFs, skipping ones already encoded
+ * Usage:  npm run video            all clips, skipping ones already encoded
+ *         npm run video -- --help  print this and exit
  *         npm run video -- --force re-encode even if the output exists
  *         npm run video -- --mp4   also write the mp4 fallback
  *         npm run video -- --crf=32 sharper and bigger (lower = better, 30-40)
- *         npm run video -- modem   only GIFs whose name contains "modem"
+ *         npm run video -- modem   only clips whose name contains "modem"
  *
  * Requires ffmpeg on PATH (brew install ffmpeg).
  */
@@ -24,8 +26,36 @@ import path from 'node:path';
 
 const SRC = 'src/assets/work';
 const OUT = 'public/work';
+const SOURCE_EXTS = ['.gif', '.mov', '.mp4', '.m4v', '.webm'];
+
+const USAGE = `
+Encode clips in ${SRC}/ into looping webm (+ poster) in ${OUT}/.
+
+  npm run video              every clip, skipping ones already encoded
+  npm run video -- <name>    only clips whose filename contains <name>
+
+Flags (everything after the -- is passed to the script):
+  --help        print this and exit
+  --force       re-encode even if the .webm already exists
+  --mp4         also write an h264 .mp4 fallback for older Safari
+  --crf=<n>     quality, lower is sharper and bigger (default 36, useful 30-40)
+
+Sources: ${SOURCE_EXTS.join(', ')}. GIFs get an extra denoise pass, since GIF
+dither is high-frequency noise a video codec would otherwise spend most of its
+bitrate preserving; real footage is left alone. Audio is always dropped — these
+play muted and autoplaying.
+
+Each clip prints the carousel entry to paste when it finishes.
+Requires ffmpeg on PATH (brew install ffmpeg).
+`.trim();
 
 const args = process.argv.slice(2);
+
+if (args.includes('--help') || args.includes('-h')) {
+  console.log(USAGE);
+  process.exit(0);
+}
+
 const force = args.includes('--force');
 const alsoMp4 = args.includes('--mp4');
 const crf = Number(args.find((a) => a.startsWith('--crf='))?.slice(6) ?? 36);
@@ -41,12 +71,12 @@ try {
   process.exit(1);
 }
 
-const gifs = readdirSync(SRC)
-  .filter((f) => f.toLowerCase().endsWith('.gif'))
+const clips = readdirSync(SRC)
+  .filter((f) => SOURCE_EXTS.includes(path.extname(f).toLowerCase()))
   .filter((f) => !filters.length || filters.some((needle) => f.includes(needle)));
 
-if (!gifs.length) {
-  console.log(`No GIFs to encode in ${SRC}/.`);
+if (!clips.length) {
+  console.log(`No clips to encode in ${SRC}/ (looking for ${SOURCE_EXTS.join(', ')}).`);
   process.exit(0);
 }
 
@@ -55,9 +85,10 @@ mkdirSync(OUT, { recursive: true });
 let before = 0;
 let after = 0;
 
-for (const gif of gifs) {
-  const name = path.basename(gif, path.extname(gif));
-  const input = path.join(SRC, gif);
+for (const clip of clips) {
+  const ext = path.extname(clip).toLowerCase();
+  const name = path.basename(clip, path.extname(clip));
+  const input = path.join(SRC, clip);
   const webm = path.join(OUT, `${name}.webm`);
   const mp4 = path.join(OUT, `${name}.mp4`);
   const poster = path.join(SRC, `${name}-poster.png`);
@@ -67,19 +98,21 @@ for (const gif of gifs) {
     continue;
   }
 
-  console.log(`- ${name}: ${mb(input)} gif ...`);
+  console.log(`- ${name}: ${mb(input)} ${ext.slice(1)} ...`);
 
-  // Even dimensions (some GIFs are odd-sized, which VP9/H.264 reject), a light
-  // denoise, then yuv420p. The denoise matters more than it looks: GIF is a
-  // 256-colour format, so sources are dithered, and that dither is high-frequency
-  // noise that a video codec spends most of its bitrate faithfully preserving.
-  const vf =
-    'scale=trunc(iw/2)*2:trunc(ih/2)*2,hqdn3d=2:1.5:6:6,format=yuv420p';
+  // Even dimensions (some sources are odd-sized, which VP9/H.264 reject), then
+  // yuv420p. GIFs get hqdn3d in between: GIF is a 256-colour format, so sources
+  // are dithered, and that dither is high-frequency noise a codec spends most of
+  // its bitrate faithfully preserving. Real footage has no dither to scrub, and
+  // the same denoise would just soften it.
+  const even = 'scale=trunc(iw/2)*2:trunc(ih/2)*2';
+  const denoise = ext === '.gif' ? ',hqdn3d=2:1.5:6:6' : '';
+  const vf = `${even}${denoise},format=yuv420p`;
   // The poster wants the frame as it is, without the denoise.
-  const posterVf = 'scale=trunc(iw/2)*2:trunc(ih/2)*2';
+  const posterVf = even;
 
-  // VP9, CRF-only (bitrate 0) so quality drives the size. -an: these are
-  // silent GIFs, and a muted autoplay video has no use for an audio track.
+  // VP9, CRF-only (bitrate 0) so quality drives the size. -an: these play muted
+  // and autoplaying, so an audio track is dead weight even when the source has one.
   run(['-y', '-i', input, '-c:v', 'libvpx-vp9', '-crf', String(crf), '-b:v', '0',
        '-row-mt', '1', '-vf', vf, '-an', webm]);
 
@@ -102,7 +135,7 @@ for (const gif of gifs) {
 
 if (before) {
   console.log(
-    `\n${(before / 1024 / 1024).toFixed(1)}MB of GIF -> ` +
+    `\n${(before / 1024 / 1024).toFixed(1)}MB of source -> ` +
       `${(after / 1024 / 1024).toFixed(1)}MB of webm ` +
       `(${(before / after).toFixed(0)}x smaller).`
   );
