@@ -27,7 +27,7 @@ import modem from '../assets/work/modem-poster.png';
 import ISObe from '../assets/work/isobe.jpg';
 import tags_near_you from '../assets/work/pipeline.svg';
 import birdhaus from '../assets/work/birdhaus-poster.png';
-import jousting_around from '../assets/work/jousting_around.jpg';
+import jousting_around from '../assets/work/jousting_around-poster.png';
 import knight_owl from '../assets/work/knight-owl-poster.png';
 import double_exposure from '../assets/work/double-exposure-poster.png';
 import scrap_rats from '../assets/work/scrap_rats_concept.png';
@@ -115,6 +115,7 @@ export const games: Project[] = [
       'Face off with a friend to win the oddly-humoured goblin king\'s favor. This was the first project where I handled all visual elements, it proved to be the confidence builder I needed to publish games.',
     tags: ['PvP', 'C#', 'Built with Unity'],
     image: jousting_around,
+    video: ['jousting_around.webm'],
     links: [
       { label: 'Play on Steam', url: 'https://store.steampowered.com/app/4983950/Jousting_Around/' },
     ],
