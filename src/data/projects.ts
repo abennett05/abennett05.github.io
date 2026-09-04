@@ -79,7 +79,7 @@ export const projects: Project[] = [
     subtitle: 'All-in-one invoice management solution',
     description:
       'Crafted for businesses who wish to modernize their invoice payment process. Send, manage, and close out invoices in your ERP all from one web dashboard. Built to be scalable and fit the needs of any business',
-    tags: ['React', 'TS', 'SQLite', 'Docker'],
+    tags: ['React', 'TS', 'Node.JS', 'SQLite', 'Docker'],
     image: invoice_pay,
   },
   {
