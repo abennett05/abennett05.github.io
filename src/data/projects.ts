@@ -24,7 +24,7 @@ import type { ImageMetadata } from 'astro';
 
 import invoice_pay from '../assets/work/invoice_pay.png';
 import modem from '../assets/work/modem-poster.png';
-import ISObe from '../assets/work/isobe.jpg';
+import ISObe from '../assets/work/ISObe-demo-poster.png';
 import tags_near_you from '../assets/work/pipeline.svg';
 import birdhaus from '../assets/work/birdhaus-poster.png';
 import jousting_around from '../assets/work/jousting_around-poster.png';
@@ -101,6 +101,7 @@ export const projects: Project[] = [
       'Playing games on retro consoles is great, apart from the storage aspect. ISObe solves this by providing a digital library that gamers expect from modern systems. Additionally, ISObe enables management of your entire retro library from any device in your home. Next time you boot up your console, your games are ready to go!',
     tags: ['React', 'TS', 'Python', 'SQLite'],
     image: ISObe,
+    video : ['work/ISObe-demo.webm'],
     links: [
       { label: 'Github', url: 'https://github.com/abennett05/isobe' },
     ],
