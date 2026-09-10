@@ -63,7 +63,7 @@ export const projects: Project[] = [
     image: modem,
     video: ['work/modem.webm', 'work/modem.mp4'],
     links: [
-      { label: 'Website', url: 'https://abennett05.github.io/modem_web/'}
+      { label: 'Website', url: 'https://meetmodem.com'}
     ]
   },
   {
