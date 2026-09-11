@@ -22,10 +22,10 @@
  */
 import type { ImageMetadata } from 'astro';
 
-import invoice_pay from '../assets/work/invoice_pay.png';
+import invoice_pay from '../assets/work/invoice-pay-demo-poster.png';
 import modem from '../assets/work/modem-poster.png';
 import ISObe from '../assets/work/ISObe-demo-poster.png';
-import tags_near_you from '../assets/work/pipeline.svg';
+import tags_near_you from '../assets/work/tags-near-you-demo-poster.png';
 import birdhaus from '../assets/work/birdhaus-poster.png';
 import jousting_around from '../assets/work/jousting_around-poster.png';
 import knight_owl from '../assets/work/knight-owl-poster.png';
@@ -73,6 +73,7 @@ export const projects: Project[] = [
       'Developed at Auburn University\'s RFID Lab alongside <a target="_blank" rel="noopener noreferrer" href="https://harper-rhett.github.io/">Harper Rhett</a>. By training a machine learning model based on positional and temporal data paired with RSSI values, we were able to accurately predict the location of RFID tags.',
     tags: ['XR', 'Machine Learning', 'RFID'],
     image: tags_near_you,
+    video: ['work/tags-near-you-demo.webm'],
   },
   {
     title: 'InvoicePay',
@@ -81,6 +82,7 @@ export const projects: Project[] = [
       'Crafted for businesses who wish to modernize their invoice payment process. Send, manage, and close out invoices in your ERP all from one web dashboard. Built to be scalable and fit the needs of any business',
     tags: ['React', 'TS', 'Node.JS', 'SQLite', 'Docker'],
     image: invoice_pay,
+    video: ['work/invoice-pay-demo.webm'],
   },
   {
     title: 'BirdHaus',
